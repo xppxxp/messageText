@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	#tab div{border: 1px solid black;width: 200px;height: 200px;display: none}
+	.active{background: red;}
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		//调用插件
+		$('#tab').tabs({
+			heads:['2','4','6'],
+			bodys:['22','33','44'],
+			events:'click'
+		});
+
+		$('#tab').on('beforeChange',function(){
+			alert(1);
+		});
+		
+		$('#tab').on('afterChange',function(){
+			alert($(this).find('div:visible').html())
+		})
+
+	});
+	//闭包  局部变量 放冲突
+	(function($){
+		//设置默认值
+		var defaults={
+			heads:['1','2','3'],
+			bodys:['111','222','333'],
+			events:'click'
+		};
+		//配置信息
+		var settings={};
+		var $parent=null;
+
+		function fnTab(options){
+			//给配置信息赋值
+			$parent = this;
+			$.extend(settings,defaults,options);
+			create();
+			bind();
+		}
+		function create(){
+
+			for (var i = 0; i < settings.heads.length; i++) {
+				var $input = $('<input type="button" value="'+settings.heads[i]+'">');
+				if (i==0) {
+					$input.attr('class','active');
+				};
+				$parent.append($input);
+			};
+
+			for (var i = 0; i < settings.bodys.length; i++) {
+				var $div = $('<div>'+settings.bodys[i]+'</div>');
+				if (i==0) {
+					$div.css('display','block');
+				}
+					$parent.append($div);
+				};
+			};
+
+		function bind(){
+			$parent.find('input').on(settings.events,function(){
+				$parent.trigger('beforeChange');
+				$parent.find('input').attr('class','');
+				$(this).attr('class','active');
+				$parent.find('div').css('display','');
+				$parent.find('div').eq($(this).index()).css('display','block');
+				$parent.trigger('afterChange');
+			})
+		}
+		// 添加实例方法
+		$.fn.extend({
+			tabs:fnTab
+		})
+
+	})(jQuery);
+
+	</script>
+</head>
+<body>
+	<div id="tab">
+<!-- 		<input type="button" value="1" class="active">
+<input type="button" value="2">
+<input type="button" value="3">
+<div>111</div>
+<div>222</div>
+<div>333</div> -->
+	</div>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red;position: absolute;top:500px;}
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+
+		window.onload=function(){
+			var oDiv=document.getElementById('div1');
+
+			oDiv.onmousedown=function(ev){
+				var ev=ev||window.event;
+				var timer=null; 
+				var	disX=ev.clientX-this.offsetLeft;
+				var disY=ev.clientY-this.offsetTop;
+				var downX=ev.clientX;
+				var downY=ev.clientY;
+				var speedX=0;
+				var speedY=0;
+
+
+				document.onmousemove=function(ev){
+					var ev=ev||window.event;
+					oDiv.style.left=ev.clientX-disX+'px';
+					oDiv.style.top=ev.clientY-disY+'px';
+					speedX=ev.clientX-downX;
+					speedY=ev.clientY-downY;
+					downX=ev.clientX;
+					downY=ev.clientY;
+
+				}
+
+
+				document.onmouseup=function(){
+					document.onmousedown=document.onmousemove=null;
+					
+					clearInterval(timer);
+					timer=setInterval(function(){
+
+						speedY+=1;
+						var L=oDiv.offsetLeft+speedX;
+						var T=oDiv.offsetTop+speedY;
+						if (L<=0) {
+							L=0;
+							speedX=-speedX;
+							speedX*=0.75;
+						};
+						if (L>=document.documentElement.clientWidth-oDiv.offsetWidth) {
+							L=document.documentElement.clientWidth-oDiv.offsetWidth;
+							speedX=-speedX;
+							speedX*=0.75;
+						};
+						
+						if (T<=0) {
+							T=0;
+							speedY=-speedY;
+							speedY*=0.75;
+
+						};
+						if (T>=document.documentElement.clientHeight-oDiv.offsetHeight) {
+							T=document.documentElement.clientHeight-oDiv.offsetHeight;
+							speedY=-speedY;
+							speedY*=0.75;
+							speedX*=0.75;
+						};
+
+						oDiv.style.left=L+'px';
+						oDiv.style.top=T+'px';
+					},30)
+
+				}
+
+				return false;
+			}
+
+
+
+		}
+		
+	</script>
+</head>
+<body>
+<div id="div1"></div>
+</body>
+</html>

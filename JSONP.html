@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script>
+	function fn1(data){
+		 var html='';
+		 var oUl=document.getElementsByTagName('ul')[0];
+		for (var i = 0; i < data.length; i++) {
+			html+='<li>'+data[i]+'</li>';
+
+		};
+		oUl.innerHTML=html;
+	}
+	function fn2(data){
+		 var html='';
+		 var oUl1=document.getElementsByTagName('ul')[1];
+		for (var i = 0; i < data.length; i++) {
+			html+='<li>'+data[i]+'</li>';
+
+		};
+		oUl1.innerHTML=html;
+	}
+	</script>
+	<!-- <script src="1.txt"></script> -->
+	<script type="text/javascript">
+	window.onload=function(){
+		var oBtn=document.getElementById('btn');
+	oBtn.onclick=function(){
+		var oScript=document.createElement('script');
+		oScript.src='getData.php?callback=fn1';
+		document.body.appendChild(oScript);
+
+	};
+	var oBtn1=document.getElementById('btn1');
+	oBtn1.onclick=function(){
+		var oScript=document.createElement('script');
+		oScript.src='getData.php?callback=fn2&t=str';
+		document.body.appendChild(oScript);
+	}
+
+	}
+	
+	</script>
+</head>
+<body>
+	<input type="button" value="加载数字" id="btn"/>
+	<ul id="ul1"></ul>
+	<input type="button" value="加载汉字" id="btn1"/>
+	<ul id="ul2"></ul>
+
+</body>
+</html>

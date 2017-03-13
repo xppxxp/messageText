@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title></title>
+<script src="http://cdn.staticfile.org/jquery/2.0.0/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+#wrap{
+
+    width:350px;
+    text-align:center;
+    margin:auto;
+    font-size:0;
+}
+
+#wrap div{
+    display:inline-block;
+    width:100px;
+    height:100px;
+    border:1px solid;
+    padding:0;
+    margin:5px;
+    font-size:40px;
+
+    display:inline !ie;
+    zoom:1 !ie;
+}
+
+div.selected {
+  background-color: red;
+}
+</style>
+<script>
+$(function() {
+        var sort = [0,1,2,5,8,7,6,3],
+                total = 8,
+                card = $('#wrap div'),
+                current = 0,
+                next, trun, halt;
+
+        card.eq(4).on('click', function() {
+                trun = (Math.floor( Math.random() * 3 ) + 1) * total;
+                halt = Math.floor( Math.random() * total );
+                console.log(trun, halt + 1);
+                var run = setInterval(function() {
+                        next = 1 + current;
+                        if(next >= total) {
+                                next = 0;
+                        }
+
+                        if(trun) {
+                                trun --;
+                        } else if(halt == next) {
+                                clearInterval(run);
+                        }
+
+                        card.eq(sort[current]).removeClass('selected');
+                        card.eq(sort[current = next]).addClass('selected');
+                }, 100)
+        })
+});
+</script>
+</head>
+<body>
+<div id="wrap">
+    <div class="selected">1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>8</div>
+    <div id="start">go</div>
+    <div>4</div>
+    <div>7</div>
+    <div>6</div>
+    <div>5</div>
+</div>
+</body>
+</html>

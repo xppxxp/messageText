@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		img{height: 400px;}
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+		var oImage=new Image();
+		var aImg=document.getElementsByTagName('img');
+		download();
+		window.onscroll=download;
+
+		function download(){
+			var scrollTop=document.documentElement.scrollTop||document.body.scrollTop;
+			for (var i = 0; i < aImg.length; i++) {
+				if (getTop(aImg[i])<scrollTop+document.documentElement.clientHeight) {
+					aImg[i].src=aImg[i].getAttribute('_src');
+				};
+			};
+			
+
+		}
+
+		function getTop(obj){
+			var iTop=0;
+			while(obj.offsetParent){
+				iTop+=obj.offsetTop;
+				obj=obj.offsetParent;
+			}
+			return iTop;
+		}
+
+
+	}
+	
+		
+	</script>
+</head>
+<body>
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+		<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+		<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+		<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/.4jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+	<img _src="img/5.jpg" src="0.jpg">
+	<img _src="img/6.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/1.jpg" src="0.jpg">
+	<img _src="img/2.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/3.jpg" src="0.jpg">
+	<img _src="img/4.jpg" src="0.jpg">
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red;position: absolute;}
+	</style>
+	<script type="text/javascript">
+
+window.onload=function(){
+	var Tween = {
+
+    Linear: function(t,b,c,d){ return c*t/d + b; },
+    easeIn: function(t,b,c,d){
+            return c*(t/=d)*t + b;
+        },
+        easeOut: function(t,b,c,d){
+            return -c *(t/=d)*(t-2) + b;
+        },
+        easeInOut: function(t,b,c,d){
+            if ((t/=d/2) < 1) return c/2*t*t + b;
+            return -c/2 * ((--t)*(t-2) - 1) + b;
+        }
+    };
+
+	var oDiv=document.getElementById('div1');
+
+	oDiv.onclick=function(){
+
+		animate(this,{
+			width:400,
+			height:400,
+			left:300,
+			top:300
+		},2000,'Linear',function(){alert(1)});
+	}
+
+	function animate(obj,json,times,fx,fn){
+
+		clearInterval(obj.timer);
+		//设置初始值为空json
+		var iCur={};
+		//找出初始值
+		for(var attr in json){
+			iCur[attr]=0;
+			//样式是否为不透明度
+			if (attr=='opacity') {
+				iCur[attr]=Math.round(getStyle(obj,attr)*100);
+			}else{
+			iCur[attr]=parseInt(getStyle(obj,attr));				
+			}
+		}
+
+		//获取开始的时间
+		var startTime=now();
+		obj.timer=setInterval(function(){
+			//获取当前时间
+			var nowTime=now();
+			var t=times-Math.max(0,startTime-nowTime+times);
+			for(var attr in json){
+				//推出当前值t,b,c,d
+				var value=Tween[fx](t,iCur[attr],json[attr]-iCur[attr],times);
+
+				if (attr=='opacity') {
+
+					obj.style.opacity=value/100;
+					obj.style.filter='alpha(opacity='+value+')';
+				}else{
+					obj.style[attr]=value+'px';
+				}
+			};
+			if (t==2000) {
+				clearInterval(obj.timer);
+				fn&&fn();
+			};
+
+		},13)
+	};
+
+	//封装getStyle函数
+	function getStyle(obj,attr){
+		return obj.getCurrentStyle ? obj.getCurrentStyle[attr] : getComputedStyle(obj)[attr];
+	}
+	function now(){
+		return (new Date()).getTime();
+	}
+}
+
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

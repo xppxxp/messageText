@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 50px;height: 200px;background: red;position: absolute;left: -50px;top: 100px;}
+		#div2{width: 30px;height: 60px;background: black;position: absolute;right:-30px;top:70px;color: white;text-align: center;font-size: 16px;line-height: 18px;}
+		img{margin-left: 200px;}
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+
+		var oDiv1=document.getElementById('div1');
+		var oDiv2=document.getElementById('div2');
+		var oImg=document.getElementsByTagName('img')[0];
+		//点击可分享
+		oDiv1.onmouseover=function(){
+			startMove(oDiv1,'left',0,5);
+
+		}
+		oDiv1.onmouseout=function(){
+			startMove(oDiv1,'left',-50,5);
+		}
+		oImg.onmouseover=function(){
+			startMove(oImg,'opacity',30,1);
+		}
+		oImg.onmouseout=function(){
+			startMove(oImg,'opacity',100,1);
+		}
+	
+		//封装运动函数（offset方法）；
+
+		function startMove(obj,attr,iTarget,iSpeed,endFn){
+
+		clearInterval(obj.timer);
+		var iCur=0;
+
+		if (attr=='opacity') {
+			iSpeed=css(obj,'opacity')*100<iTarget ? iSpeed : -iSpeed;}
+		else{
+			iSpeed=parseInt(css(obj,attr))<iTarget ? iSpeed : -iSpeed;
+		}
+
+		obj.timer = setInterval( function () {
+			if (attr == 'opacity') {
+				iCur = css(obj,'opacity')*100;
+			}else{
+				iCur = parseInt(css(obj, attr));
+			};
+
+			iCur += iSpeed;
+
+			if (iCur>=iTarget&&iSpeed>0 || iCur<=iTarget&&iSpeed<0) {
+				iCur=iTarget;
+			};
+
+			if (attr == 'opacity') {
+				obj.style.opacity = iCur/100;
+				obj.style.filter = 'alpha(opacity='+iCur+')';
+			}
+			else
+			{
+				obj.style.attr = iCur+'px';
+			};
+
+			if (iCur == iTarget) {
+				clearInterval(obj.timer);
+				endFn&&endFn;
+			};
+
+		}, 30)
+		
+	}
+
+
+
+	//封装css函数
+	function css(obj,attr){
+		return obj.getCurrentStyle ? obj.getCurrentStyle[attr] : getComputedStyle(obj)[attr];
+	}
+
+}
+
+	
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<div id="div2">分享到</div>
+	</div>
+	<img src="img/1.jpg">
+
+</body>
+</html>

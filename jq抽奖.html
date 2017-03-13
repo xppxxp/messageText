@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+
+		ul{width: 340px;height:310px }
+		li{border: 1px solid black;height: 100px;width: 100px;float: left;margin-right: 10px;list-style: none;display: inline-block;border-bottom: none;text-align: center;line-height: 100px;}
+		.active{background: red;}
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+	/*$(function(){
+
+		//设置最后三个li的边框
+
+		$('ul li').eq(5).nextAll().css('border-bottom','1px solid black');
+		//点击开始
+			var onOff=true;
+			var timer=null;
+		$('input').click(function(){
+			$('input').val('停止');
+
+			onOff=!onOff
+			var arr=[];
+			clearInterval(timer);
+			timer=setInterval(function(){
+
+				var num1=0;
+
+				for (var j = 0; j < 1; j++) {
+
+				num1=Math.round(Math.random()*8);
+				arr.push(num1);
+
+					for (var i = 0; i < arr.length-1; i++) {
+
+					if (num1==arr[i]) {arr.pop();j--;}
+
+				};					
+				};
+				
+				if (arr.length==9) {arr=[num1]};
+
+				$('ul li[style*=red]').css('background','');
+				$('ul li').eq(num1).css('background','red');
+
+
+			},1000);
+				if (onOff) {
+					$('input').val('抽奖');
+				clearInterval(timer);
+			};
+			
+		})
+	});*/
+	$(function(){
+		var $li=$('ul li');
+		var num=0;
+		var stepnum=0;
+		var timer=null;
+		$li.eq(5).nextAll().css('border-bottom','1px solid black');
+
+		$('input').click(function(){
+			clearInterval(timer);
+			stepnum=Math.floor(Math.random()*$li.length+$li.length);
+			timer=setInterval(function(){
+				$li.eq(num).attr('class','active').siblings().attr('class','');
+				stepnum--;
+				if (num==$li.length) {
+					num=0
+				};
+				if (stepnum==0) {
+					clearInterval(timer);
+					alert($li.eq(num).html());
+				};
+				num++;
+			},100)
+			
+		})
+	})
+
+
+
+	</script>
+</head>
+<body>
+<input type="button" value="抽奖">
+	<ul>
+		<li>三等奖</li>
+		<li>二等奖</li>
+		<li>三等奖</li>
+		<li>四等奖</li>
+		<li>一等奖</li>
+		<li>三等奖</li>
+		<li>谢谢</li>
+		<li>四等奖</li>
+		<li>四等奖</li>
+	</ul>
+</body>
+</html>

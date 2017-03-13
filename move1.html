@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		/* div{position: absolute;width: 100px;height: 100px;background: red;} */
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+
+		var oBtn=document.getElementById('btn');
+		var oDiv=document.getElementsByTagName('div')[0];
+		var Timer=null;
+		oBtn.onclick=function(){
+			startMove(oDiv);
+		}
+
+		function startMove(obj){
+
+		clearInterval(Timer);
+
+		Timer=setInterval(function(){
+
+			if (obj.offsetLeft<500&&obj.offsetTop==100) {
+				obj.style.left=obj.offsetLeft+10+'px';
+			};
+			if (obj.offsetLeft>=500&&obj.offsetTop<500) {
+				obj.style.top=obj.offsetTop+10+'px';
+			};
+			if (obj.offsetTop>=500&&obj.offsetLeft<=500) {
+				obj.style.left=obj.offsetLeft-10+'px';
+			};
+			if (obj.offsetLeft<=100&&obj.offsetTop<=500) {
+				obj.style.top=obj.offsetTop-10+'px';
+			};
+
+
+		},30);
+	}
+}
+
+	
+	</script>
+</head>
+<body>
+	<input type="button" id="btn" value="动起来">
+	<div style="width:100px;height:100px;background:red;position:absolute;top:100px;left:100px"></div>
+</body>
+</html>

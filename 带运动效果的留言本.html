@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	body{margin: 0}
+	ul{position: absolute;top:7px;right: 10px;width: 700px;border: 1px solid #000;height: 500px}
+	li{list-style: none;line-height: 28px;border-bottom: 1px dotted #000;word-break:break-all;}
+
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+	/*先写出没有运动的效果，然后把赋值变成运动形式*/
+		window.onload=function(){
+
+			var	oContent=document.getElementById('content');
+			var oBtn=document.getElementById('btn');
+			var oUl=document.getElementById('ul1');
+
+
+			oBtn.onclick=function(){
+				var oLi=document.createElement('li');
+				oLi.innerHTML=oContent.value;
+
+				if (oUl.children[0]) {
+					oUl.insertBefore(oLi,oUl.children[0])}else{
+						oUl.appendChild(oLi);
+					}
+				var iHeight=parseInt(css(oLi,'height'));
+				oLi.style.opacity=0;
+				oLi.style.filter='alpha(opacity=0)';
+					 oLi.style.height=0;
+					startMove(oLi,{
+						height:iHeight,
+						opacity:100
+					})
+				};
+			}
+		
+	</script>
+</head>
+<body>
+	<textarea id="content" rows="10" cols="50"></textarea>
+	<input type="button" value="留言" id="btn"/>
+	<ul id="ul1">
+		<li>111111111</li>
+		<li>111111111</li>
+		<li>111111111</li>
+		<li>111111111</li>
+	</ul>
+</body>
+</html>

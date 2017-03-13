@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+			#q{width: 300px;height: 30px;padding: 5px;border: 1px solid #f90;font-style:16px}
+			dl{border-bottom: 1px dotted gray}
+			dt{font-weight: bold;}
+	</style>
+	<script type="text/javascript">
+
+		function fn(data){
+
+	 	var oMsg=document.getElementById('message');
+		var oQ=document.getElementById('q');
+			console.log(data);
+			oMsg.innerHTML=data.title.object.$t;
+
+		}
+
+	</script>
+	<script type="text/javascript">
+	window.onload=function(){
+
+		var oQ=document.getElementById('q');
+		var oBtn=document.getElementById('btn');
+	 	var oMsg=document.getElementById('message');
+	 	var oList=document.getElementById('list');
+
+	 	oBtn.onclick=function(){
+
+	 		if (oQ.value!='') {
+
+	 			var oScript=document.createElement('script');
+	 			oScript.src='http://api.douban.com/book/subjects?q='+oQ.value+'&alt=xd&callback=fn';
+	 			document.body.appendChild(oScript);
+	 		
+	 		}
+	 	}
+	}
+	 
+	</script>
+</head>
+<body>
+	<input type="text" id="q"><input type="button" value="搜索" id="btn">
+	<p id="msg"></p>
+	<hr/>
+	<div id="list">
+		<dl>
+			<dt>adsdsadsadsa</dt>
+			<dd><img src=""/></dd>
+		</dl>
+	</div>
+	
+
+</body>
+</html>

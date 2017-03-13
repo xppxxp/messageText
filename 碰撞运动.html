@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red}
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+	
+		window.onload=function(){
+			var oDiv=document.getElementById('div1');
+			var timer=null;
+
+			oDiv.onmouseover=function(){
+				startMove(oDiv,300);
+			};
+			oDiv.onmouseout=function(){
+				startMove(oDiv,30);
+			}
+
+			function startMove(obj,iTarget){
+				var iSpeed=0;
+				clearInterval(timer);
+				timer=setInterval(function(){
+
+					iSpeed+=(iTarget-obj.offsetHeight)/6;
+					iSpeed*=0.75;
+
+					if (Math.abs(iSpeed)<=1&&Math.abs(iTarget-obj.offsetHeight)<=1) {
+
+					clearInterval(timer);
+					iSpeed=0;
+					obj.style.height=iTarget+'px';
+				}else{
+					var H=oDiv.offsetHeight+iSpeed;
+					if (H<0) {
+						H=0
+					};
+					oDiv.style.height=H+'px';
+				}
+
+
+				},30)
+			};
+
+		}
+		
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+</body>
+</html>

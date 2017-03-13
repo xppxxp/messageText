@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 500px;height: 500px;background: red;position: absolute;top: 100px;}
+
+	</style>
+	<script type="text/javascript">
+	window.onload=function(){
+
+		var oDiv1=document.getElementById('div1');
+
+		//点击可分享
+		oDiv1.onmouseover=function(){
+
+
+			startMove(this,{
+				width:10,
+				height:10
+			});
+		};
+
+
+		//封装运动函数（offset方法）；
+
+		function startMove(obj,json,endFn){
+
+		clearInterval(obj.timer);
+
+		var iSpeed=0
+
+		obj.timer=setInterval(function(){
+
+			var iCur=0;
+			var onOff=true;
+			for(var attr in json){
+
+			var iTarget=json[attr];
+		
+		if (attr=='opacity') {
+			iCur=css(obj,'opacity')*100;}
+			else{
+				iCur=parseInt(css(obj,attr));
+			}
+			
+			iSpeed=(iTarget-iCur)/8;
+			iSpeed=iSpeed>0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+			if (iCur!=iTarget) {
+				onOff=false;
+				iCur=iCur+iSpeed;	
+			};
+
+
+
+
+			if (attr=='opacity') {
+				obj.style.opacity=iCur/100;
+				obj.style.filter='alpha(opacity='+iCur+')';
+			}else{
+
+			obj.style[attr]=iCur+'px';
+			
+			}
+		}
+		if (onOff) {
+			clearInterval(obj.timer);
+		};
+
+		},300)
+	}
+
+
+	//封装css函数
+	function css(obj,attr){
+		return obj.getCurrentStyle ? obj.getCurrentStyle[attr] : getComputedStyle(obj)[attr];
+	}
+
+
+}
+
+	
+	</script>
+</head>
+<body>
+	<div id="div1"></div>
+
+</body>
+</html>

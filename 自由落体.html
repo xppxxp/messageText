@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		#div1{width: 100px;height: 100px;background: red;position: absolute;top:500px;}
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+
+		window.onload=function(){
+			var oDiv=document.getElementById('div1');
+			var oBtn=document.getElementsByTagName('input')[0];
+			var x=10;
+
+			oBtn.onclick=function(){
+
+				startMove()
+			};
+
+			function startMove(){
+				var timer=null;
+				var iSpeed=-40;
+				clearInterval(timer);
+
+				timer=setInterval(function(){
+					
+					iSpeed+=3;
+					var t=oDiv.offsetTop+iSpeed;
+
+					if (t>document.documentElement.clientHeight-oDiv.offsetHeight) {
+						t=document.documentElement.clientHeight-oDiv.offsetHeight
+						iSpeed=-iSpeed;
+						iSpeed*=0.75;
+						x*=0.75;
+						
+					};
+		
+					oDiv.style.top=t+'px';	
+					oDiv.style.left=oDiv.offsetLeft+x+'px';
+				},30)
+			}
+
+
+
+		}
+		
+	</script>
+</head>
+<body>
+<input type="button" value="开始运动">
+<div id="div1"></div>
+</body>
+</html>

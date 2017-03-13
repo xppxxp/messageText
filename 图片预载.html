@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+	window.onload=function(){
+		var oImage=new Image();
+		var oImg=document.getElementsByTagName('img')[0];
+		var num=0;
+		var arr=['http://i02.pictn.sogoucdn.com/5837f08265c34e23',
+		'http://i01.pictn.sogoucdn.com/9a512761ac71d924',
+		'http://i01.pictn.sogoucdn.com/415d9981143db5cc',
+		'http://i02.pictn.sogoucdn.com/0ac4e19e9bd17eed',
+		'http://i02.pictn.sogoucdn.com/7fc05ae993f7dc3c',
+		'http://i04.pictn.sogoucdn.com/ee232bb85be15a71',
+		'http://i03.pictn.sogoucdn.com/0abc23ae1fcce17c',
+		'http://i02.pictn.sogoucdn.com/5837f08265c34e23',
+		'http://i01.pictn.sogoucdn.com/9a512761ac71d924',
+		'http://i01.pictn.sogoucdn.com/415d9981143db5cc',
+		'http://i02.pictn.sogoucdn.com/0ac4e19e9bd17eed',
+		'http://i02.pictn.sogoucdn.com/7fc05ae993f7dc3c',
+		'http://i04.pictn.sogoucdn.com/ee232bb85be15a71',
+		'http://i03.pictn.sogoucdn.com/0abc23ae1fcce17c'
+		];
+		var num1=0;
+
+		xunlei();
+
+		function xunlei(){
+			oImage.src=arr[num];
+			oImage.onload=function(){
+				num++;
+				document.title=num+'/'+arr.length;
+				if (num<arr.length) {
+				xunlei();
+				};
+
+				
+			};
+
+		}
+		oImg.onclick=function(){
+			num1++;
+			if (num1<arr.length) {
+			oImg.src=arr[num1];
+			};
+		}
+
+
+	}
+	
+		
+	</script>
+</head>
+<body>
+	<img src="http://i02.pictn.sogoucdn.com/5837f08265c34e23">
+</body>
+</html>

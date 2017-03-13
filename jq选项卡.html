@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+
+			$('input[value=上移]').click(function(){
+
+				var $nowLi=$(this).closest('li');
+				var $prevLi=$(this).closest('li').prev();
+				$nowLi.insertBefore($prevLi);
+				if ($nowLi.get(0)==$nowLi.parent().children().eq(0).get(0)) {
+
+					alert('无');
+				};
+				});
+
+			$('ul li input[value="下移"]').click(function(){
+
+				var $nowLi=$(this).closest('li');
+				var $nextLi=$(this).closest('li').next();
+				
+
+				if ($nextLi.length==0) {
+
+					alert('wu');
+				}else{
+					$nowLi.insertAfter($nextLi);
+				}
+
+			})
+		})
+	
+
+	</script>
+</head>
+<body>
+<ul>
+	<li><input type="button" value="上移">1<input type="button" value="下移"></li>
+	<li><input type="button" value="上移">2<input type="button" value="下移"></li>
+	<li><input type="button" value="上移">3<input type="button" value="下移"></li>
+	<li><input type="button" value="上移">4<input type="button" value="下移"></li>
+</ul>
+
+</body>
+</html>

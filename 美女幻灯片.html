@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	body{margin: 0}
+	div{position: relative;width: 520px;height: 300px;margin: 100px auto;overflow: hidden;}
+	ul{position: absolute;margin: 0;padding: 0;}
+	li{list-style: none;float: left;padding: 0;margin: 0;}
+	img{width: 520px;height:300px;vertical-align: top }
+	.span1{position: absolute;font-size: 60px;top:120px;left: 20px;cursor:pointer;color: white;background: black;border-radius: 50%;}
+	p{position: absolute;top:240px;left: 220px;}
+	.span2{display: inline-block;background: purple;border-radius: 50%;width: 10px;height: 10px;} 
+
+	</style>
+		<script src="运动.js"></script>
+	<script type="text/javascript">
+	/*先写出没有运动的效果，然后把赋值变成运动形式*/
+		window.onload=function(){
+			var aSpan1=document.getElementsByTagName('span');
+			aSpan1[1].style.left='460px';
+			var oUl=document.getElementById('ul1');
+			var aLi=oUl.getElementsByTagName('li');
+			var oP=document.getElementsByTagName('p')[0];
+			var aSpan2=oP.getElementsByTagName('span');
+			var num=0;
+
+			for (var i = 0; i < aLi.length; i++) {
+
+				oUl.style.width=520*(i+1)+'px';
+				aSpan2[i].index=i;
+				aSpan2[0].style.background='red';
+				aSpan2[i].onmouseover=function(){
+				num=this.index;
+				doMove();
+				}
+
+
+			};
+					aSpan1[1].onclick=function(){
+					num++;
+					if (num==6) {
+						num=0;
+						oUl.style.left=-520*num+'px';
+					};
+					doMove();
+				}
+				aSpan1[0].onclick=function(){
+					num--;
+					if (num==-1) {
+						num=5;
+						oUl.style.left=-520*num+'px';
+					};
+					doMove();
+				}
+
+		
+				function doMove(){
+					for(var i=0;i<aSpan2.length;i++){
+					aSpan2[i].style.background='';
+					}
+					aSpan2[num].style.background='red';
+					startMove(oUl,{
+						left:-520*num
+					})
+				}
+
+		}
+
+		
+	</script>
+</head>
+<body>
+	<div>
+		
+		<ul id="ul1">
+			<li><img src="img/1.jpg"></li>
+			<li><img src="img/2.jpg"></li>
+			<li><img src="img/3.jpg"></li>
+			<li><img src="img/4.jpg"></li>
+			<li><img src="img/5.jpg"></li>
+			<li><img src="img/6.jpg"></li>
+
+		</ul>
+		<span class="span1"><</span>
+		<span class="span1">></span>
+		<p>
+			<span class="span2"></span>
+			<span class="span2"></span>
+			<span class="span2"></span>
+			<span class="span2"></span>
+			<span class="span2"></span>
+			<span class="span2"></span>
+		</p>
+	</div>
+</body>
+</html>

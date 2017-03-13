@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	*{margin: 0;padding: 0}
+		div{height: 200px;width: 300px;border: 1px solid red;margin-bottom: 200px; }
+		img{width: 300px;height: 200px;}
+	}
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		//原生js获取不到隐藏元素的尺寸，jq可以
+		$(window).scroll(toChange);
+		toChange();
+		function toChange(){
+
+			$('img').each(function(i,elem){
+				if ($(elem).offset().top<$(window).height()+$(document).scrollTop()) {
+					$(elem).attr('src',$(elem).attr('_src'));
+				};
+			})
+		}	
+	})
+		
+
+	</script>
+</head>
+<body style="height:2000px">
+
+<div><img _src="img/1.jpg"></div>
+<div><img _src="img/2.jpg"></div>
+<div><img _src="img/3.jpg"></div>
+<div><img _src="img/4.jpg"></div>
+<div><img _src="img/5.jpg"></div>
+
+</body>
+</html>

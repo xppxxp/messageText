@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		ol,ul,body{padding: 0;margin: 0;}
+		div{width: 400px;height: 200px;position: relative;margin: 30px auto;overflow: hidden;}
+		ol{position: absolute;right: 10px;bottom: 10px;z-index: 2;width: 160px;height: 20px}
+		ol li{float: left;height: 20px;list-style: none;border: 1px solid black;width: 20px;margin-right: 10px;}
+		ol li span{width: 20px;height: 20px;display:inline-block;text-align: center;line-height: 20px;}
+		ul{position: absolute;top: 0;left: 0}
+		ul li{list-style: none;}
+		img{vertical-align: top;width: 400px;height: 200px;}
+		.active{background: red;height: 20px}
+
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+
+			var timer=null;
+			var iNow=0;
+			
+			$('ol li').mouseover(function(){
+
+				var num=$(this).index();
+				clearInterval(timer);
+				if (iNow>num+1) {
+					num=num+1;
+					$('ul').css('top',-num*200);
+				};
+				if (iNow<num-1) {
+					num=num-1;
+					$('ul').css('top',-num*200);
+				};
+
+				iNow=$(this).index();
+				
+
+				$(this).attr('class','active').siblings().attr('class','');
+				$('ul').stop().animate({
+					top:-$(this).index()*200
+				},2000);
+
+
+			}).mouseout(function(){
+				
+				timer=setInterval(function(){
+
+					iNow++;
+				if (iNow==5) {iNow=0};
+				$('ol li').eq(iNow).attr('class','active').siblings().attr('class','');
+				$('ul').stop().animate({
+					top:-200*iNow
+				},2000);
+			},2000);
+
+			})
+
+			timer=setInterval(function(){
+				iNow++;
+				if (iNow==5) {iNow=0};
+				$('ol li').eq(iNow).attr('class','active').siblings().attr('class','');
+				$('ul').stop().animate({
+					top:-200*iNow
+				},2000)
+			},2000)
+		
+
+})
+	</script>
+</head>
+<body>
+
+<div>
+	<ol>
+		<li class="active"><span>1</span></li>
+		<li><span>2</span></li>
+		<li><span>3</span></li>
+		<li><span>4</span></li>
+		<li><span>5</span></li>
+	</ol>
+	<ul>
+		<li><img src="img/1.jpg"></li>
+		<li><img src="img/2.jpg"></li>
+		<li><img src="img/3.jpg"></li>
+		<li><img src="img/4.jpg"></li>
+		<li><img src="img/5.jpg"></li>
+	</ul>
+</div>
+
+</body>
+</html>

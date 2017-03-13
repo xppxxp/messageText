@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	ul{border: 1px solid black;width: 200px;}
+	ul li span{margin-right: 50px;}
+	</style>
+	<script type="text/javascript" src="jqury.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		iNow=0;
+		$('input[value=提交]').click(function(){
+			
+			$.ajax({
+
+				url:'add.php',
+				type:'post',
+				data:{val:$('input[type=text])'.val()},
+				datatype:'json',
+				success:function(data){
+					var $li=$('<li>');
+					var mainId=data.mainId;
+					$li.html('<span mainId="'+mainId+'">'+data.text+'</span><span class="close">X</span>');
+					$('ul').prepend($li);
+				}
+			})
+		});
+
+		$('ul').delegate('span.close','click',function(){
+			var $elem=$(this);
+			$.ajax({
+				url:'remove.php',
+				data:{'mainId':$elem.attr('mainId')},
+				success:function(data){
+					$elem.parent().remove();
+				}
+			})
+		});
+
+
+		$('input[value=加载更多...]').click(function(){
+			iNow++;
+			$.ajax({
+				url:'loadPage.php?num='+iNow,
+				datatype:'json',
+				success:function(data){
+					for (var i = 0; i < data.length; i++) {
+						var $li=$('<li>');
+						var mainId=data[i].mainId;
+						var text=data[i].text;
+						$li.html('<span mainId="'+mainId+'">'+text+'</span><span class="close">X</span>');
+						$('ul').append($li);
+					};
+				}
+			})
+		})
+	})
+	</script>
+</head>
+<body>
+	<input type="text"><input type="button" value="提交">
+	<ul>
+		<li><span>111</span><span class="close">X</span></li>
+		<li><span>222</span><span class="close">X</span></li>
+		<li><span>333</span><span class="close">X</span></li>
+	</ul>
+	<input type="button" value="加载更多...">
+</body>
+</html>
